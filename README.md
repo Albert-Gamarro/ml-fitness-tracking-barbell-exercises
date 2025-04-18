@@ -2,11 +2,13 @@
 
 # ML Fitness Tracking – Barbell Exercise Classification 🏋️‍♂️🤖
 
-This is an end-to-end machine learning project focused on classifying barbell exercises using wearable sensor data — blending real-world AI application with something I care about: **fitness**.
+This is an end-to-end machine learning project focused on classifying barbell exercises using wearable sensor data.  blending real-world AI applications with something I am passionate about: **fitness**.
 
 ## 🚀 Why this project?
 
-I'm doing this project as part of a course that walks through the structure and logic of building an ML pipeline — **but doesn’t provide any starter code**. Everything you see here has been written from scratch by me, by following along and implementing it line by line.
+I embarked on this project as part of my development journey to explore and research what we can achieve with Machine Learning (ML) and AI in the fitness domain. I discovered this great project by Dave Ebbelaar that walks through the structure and logic of building an ML pipeline — **but doesn’t provide any starter code**. 
+
+All core development you see here has been written from scratch by me (with only a few functions borrowed from existing libraries to help streamline certain parts of the process). I took the time to dive deep into key concepts and techniques for feature engineering, model building, and adding useful functions, all while maintaining a mindset focused on understanding not just the WHAT or HOW, but also the WHY behind every step.
 
 > 🧠 **Learning-by-doing** is the best way to internalize concepts and truly understand the material.
 
@@ -16,6 +18,19 @@ This approach has helped me:
 - **Stay motivated and engaged** by working on a project that combines something I'm passionate about: fitness and machine learning
 
 > ⚠️ No shortcuts. No pre-written code. Just pure hands-on learning and problem-solving.
+
+## 📌 Why this matters to me
+
+I go to the gym often and this project hits that sweet spot between **technical growth** and **personal interest**. It helped me level up for professional skills and knowledge, gaining practical experience that I can apply to similar challenges in my career and future projects, all while staying deeply engaged.
+
+> This repo isn’t about perfection — it’s about progression.
+> Every commit is part of the learning journey.
+
+## 📝 Credits
+
+This project follows the structure and logic from Dave Ebbelaar's guide on building an ML pipeline. While no starter code was provided, his detailed explanations served as the blueprint for the work. All code and implementation were written by me, following his step-by-step approach
+---
+
 
 ## 🧠 What’s this project about?
 
@@ -34,21 +49,6 @@ The project combines data science, machine learning, and signal processing in a 
 - ML models: TBD (depending on the current stage)
 - Data from wearable sensors (accelerometers, gyroscopes)
 - VS Code and Jupyter Notebooks for development and experimentation
-
-## 📌 Why this matters to me
-
-I go to the gym often and this project hits that sweet spot between **technical growth** and **personal interest**. It helped me level up for professional skills and knowledge, gaining practical experience that I can apply to similar challenges in my career and future projects, all while staying deeply engaged.
-
----
-
-> This repo isn’t about perfection — it’s about progression.
-
-Every commit is part of the learning journey.
-
----
-
-## 📝 Credits & Inspiration
-
 
 
 
