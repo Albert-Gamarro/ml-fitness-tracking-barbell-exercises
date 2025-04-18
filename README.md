@@ -1,5 +1,4 @@
 
-
 # ML Fitness Tracking – Barbell Exercise Classification 🏋️‍♂️🤖
 
 This is an end-to-end machine learning project focused on classifying barbell exercises using wearable sensor data.  blending real-world AI applications with something I am passionate about: **fitness**.
@@ -29,8 +28,8 @@ I go to the gym often and this project hits that sweet spot between **technical 
 ## 📝 Credits
 
 This project follows the structure and logic from Dave Ebbelaar's guide on building an ML pipeline. While no starter code was provided, his detailed explanations served as the blueprint for the work. All code and implementation were written by me, following his step-by-step approach
----
 
+---
 
 ## 🧠 What’s this project about?
 
