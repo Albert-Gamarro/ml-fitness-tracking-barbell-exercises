@@ -56,23 +56,24 @@ The project combines data science, machine learning, and signal processing in a 
 You can use this template to structure your Python data science projects. It is based on [Cookie Cutter Data Science](https://drivendata.github.io/cookiecutter-data-science/).
 
 
+---
 
-## Project Details
+# Project Details
 
 
-Build Features:
+## Build Features:
 
-### Butterworth lowpass filter
+## Butterworth lowpass filter
 
 Smooth raw movement data (e.g., accelerometer) to highlight the core motion patterns (e.g., reps), while removing subtle noise and jitter.
 The filter doesn’t isolate reps — it works on the full time-series signal.
 It removes anything that changes **too quickly** (high frequency), and keeps **slow changes** (real rep motion). 
 
-🎯 Why Use a Lowpass Filter?
+### 🎯 Why Use a Lowpass Filter?
 - Movement patterns (like reps) are low frequency. Sensor noise is usually high frequency.
 - The filter keeps the slow, meaningful patterns and removes fast, noisy fluctuations
 
-### 📉 Dimensionality Reduction with PCA
+## 📉 Dimensionality Reduction with PCA
 
 After noise reduction, we apply **Principal Component Analysis (PCA)** to:
 
@@ -89,7 +90,53 @@ To capture overall movement energy—independent of device orientation, we have 
 - acc_r: overall acceleration magnitude (acc_x² + acc_y² + acc_z²)
 - gyr_r: overall rotational magnitude (gyr_x² + gyr_y² + gyr_z²)
 
-Value: "Equalizer" across users. It helps reduce orientation bias and makes your features more robust for ML modeling.
-- Direction-independent magnitude — you're not betting on one axis
-- A more universal signal of movement intensity
-- Better performance in real-world scenarios, especially with diverse participants or use cases
+These are **direction-agnostic** features — useful when:
+- Participants move in slightly different directions
+- A more universal signal of movement intensity/ Sensor orientation isn’t perfectly consistent
+- Better performance in real-world scenarios. You want features that generalize better across users
+
+> Value: "Equalizer" across users. It helps reduce orientation bias and makes your features more robust for ML modeling.
+
+## ⏱ Temporal Abstraction
+
+To prepare time-series sensor data for machine learning, we apply **temporal abstraction**, which summarizes movement over short time windows using statistical features like:
+
+- **Mean** – the average signal value over the window
+- **Standard deviation** – the signal’s variability over the window
+
+### 🎯 Why Temporal Abstraction?
+
+Raw sensor data (e.g., from accelerometers and gyroscopes) is highly detailed and noisy, collected at millisecond intervals. Temporal abstraction:
+
+- Reduces noise and smooths fluctuations
+- Converts chaotic signal spikes into structured, stable features
+- Preserves the **core motion patterns** like reps or transitions
+- Makes the data more useful for ML models
+
+### ⚙️ How It Works?
+
+We use a **sliding window** approach:
+
+- The window size is ~1 second (5 samples, given 200ms sampling rate)
+- For each row, we compute the mean and std over the surrounding window
+- The dataset keeps the **same number of rows** (i.e., per-millisecond resolution), just with new abstracted columns
+
+This results in features like:
+
+| Time | acc_y | acc_y_mean | acc_y_std | acc_r_mean | acc_r_std |
+|------|-------|------------|-----------|------------|------------|
+| ...  | ...   | ...        | ...       | ...        | ...        |
+
+> ✅ Each row now carries context about the recent movement — perfect for models that require temporal continuity.
+
+### 📈 Why Include `acc_r` and `gyr_r`?
+
+We also compute abstraction on:
+- `acc_r`: combined intensity of all accelerometer axes
+- `gyr_r`: combined intensity of all gyroscope axes
+
+By adding `mean` and `std` of these composite values, we capture **how strong and consistent** the overall movement is 
+
+In short:
+> **Temporal abstraction turns noisy raw signals into powerful movement descriptors** – helping your model focus on *what matters*.
+ns.
