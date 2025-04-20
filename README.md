@@ -12,7 +12,8 @@ All core development you see here has been written from scratch by me (with only
 > 🧠 **Learning-by-doing** is the best way to internalize concepts and truly understand the material.
 
 This approach has helped me:
-- **Deepen my understanding of ML workflows** through real-world application
+- **Deepen my understanding of ML workflows** through real-world application.
+    - Speacially on time-series sensor data for machine learning.
 - **Sharpen my coding and debugging skills** by solving problems as they arise
 - **Stay motivated and engaged** by working on a project that combines something I'm passionate about: fitness and machine learning
 
@@ -27,7 +28,7 @@ I go to the gym often and this project hits that sweet spot between **technical 
 
 ## 📝 Credits
 
-This project follows the structure and logic from Dave Ebbelaar's guide on building an ML pipeline. While no starter code was provided, his detailed explanations served as the blueprint for the work. All code and implementation were written by me, following his step-by-step approach
+This project follows the structure and logic from Dave Ebbelaar's Full Machine Learning Project guide on building an ML pipeline. While no starter code was provided, his detailed explanations and videos served as the blueprint for the work. 
 
 ---
 
@@ -73,7 +74,7 @@ It removes anything that changes **too quickly** (high frequency), and keeps **s
 - Movement patterns (like reps) are low frequency. Sensor noise is usually high frequency.
 - The filter keeps the slow, meaningful patterns and removes fast, noisy fluctuations
 
-## 📉 Dimensionality Reduction with PCA
+## Dimensionality Reduction with PCA
 
 After noise reduction, we apply **Principal Component Analysis (PCA)** to:
 
@@ -129,7 +130,7 @@ This results in features like:
 
 > ✅ Each row now carries context about the recent movement — perfect for models that require temporal continuity.
 
-### 📈 Why Include `acc_r` and `gyr_r`?
+### Why Include `acc_r` and `gyr_r`?
 
 We also compute abstraction on:
 - `acc_r`: combined intensity of all accelerometer axes
@@ -140,3 +141,32 @@ By adding `mean` and `std` of these composite values, we capture **how strong an
 In short:
 > **Temporal abstraction turns noisy raw signals into powerful movement descriptors** – helping your model focus on *what matters*.
 ns.
+
+## Frequency Features (Fourier Transform)
+
+To capture the *repetition patterns* in movement (e.g., squats, push-ups), we apply a **Fourier Transform** to the time-series data.
+
+**Why?**  
+Repetitive motions have distinct frequencies (e.g., a rep every 2.5 sec = ~0.4 Hz).  
+Noise and jitter appear at higher frequencies.
+
+**What it does:**  
+Transforms movement data from time → frequency domain, giving us:
+
+- **Dominant repetition frequency**  
+- **Power and consistency** of movement rhythm  
+- Filters out subtle noise or irregularities
+
+These features help the model better understand movement quality and tempo — which can vary across exercises and participants.
+
+
+## Dealing with Overlapping Windows
+
+When using sliding windows to compute temporal and frequency-based features, overlapping windows can create highly correlated samples. This artificial similarity between rows can lead to **model overfitting** — where the model learns repetitive patterns rather than meaningful variation.
+
+✅ **Solution**: 50% Downsample is considere a good threshold if there's enough data. Downsampling the data by keeping only every second row after feature extraction. 
+
+This reduces the correlation between consecutive samples, leading to:
+- Better model generalization
+- Less overfitting during training
+- More realistic performance on new, unseen data
