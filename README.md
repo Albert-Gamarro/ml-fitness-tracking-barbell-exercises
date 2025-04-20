@@ -170,3 +170,17 @@ This reduces the correlation between consecutive samples, leading to:
 - Better model generalization
 - Less overfitting during training
 - More realistic performance on new, unseen data
+
+## Clustering:
+
+- Discover natural groupings in the data (e.g., different types of exercises or styles)
+- Explore structure without relying on labels (unsupervised learning)
+
+Even if clustering isn't perfectly aligned with exercise labels, it’s still valuable:
+
+- It confirms our features capture meaningful movement patterns
+- The cluster ID can be used as an extra input for supervised models
+- It helps reveal hidden subgroups or technique differences
+- It's a sanity check to ensure we’re not just modeling noise
+
+Clustering isn’t the goal — it’s a tool to better **understand and structure the data** before full model training.

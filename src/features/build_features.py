@@ -258,13 +258,16 @@ cluster_columns = ["acc_x", "acc_y", "acc_z"]
 k_values = range(2, 10)
 inertias_list = []
 
+
+# Step 1: Try different K (number of clusters) and store the SSD (inertia)
+
 for k in k_values:
     subset = df_cluster[cluster_columns]
     kmeans = KMeans(n_clusters=k, n_init=20, random_state=0)
     cluster_labels = kmeans.fit_predict(subset)
     inertias_list.append(kmeans.inertia_)
 
-# Elbow
+# Step 2: Plot the Elbow Curve to find the point where increasing K
 plt.figure(figsize=(20, 10))
 plt.plot(k_values, inertias_list)
 plt.xlabel("K")
